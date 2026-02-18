@@ -1,6 +1,15 @@
 <?php
 
-require 'libs.php';
+require_once 'libs.php';
+
+echo date('Y-m-d');
+echo "<br><br><br>";
+
+// $result = mysqli_fetch_assoc($nominalSaldo);
+$totalSaldo = sumSaldo();
+
+var_dump($totalSaldo);
+var_dump($totalSaldo["total"]);
 
 if(isset($_POST["submit"])) {
 
@@ -35,6 +44,7 @@ if(isset($_POST["submit"])) {
     <form action="" method="POST">
         <ul>
             <li>
+                <input type="hidden" name="<?= $totalSaldo; ?>">
                 <label for="keterangan">Keterangan: </label>
                 <input type="text" name="keterangan" id="keterangan">
             </li>
@@ -50,8 +60,8 @@ if(isset($_POST["submit"])) {
             </li>
 
             <li>
-                <label for="saldo">Saldo: </label>
-                <input type="number" name="saldo" id="saldo" value="" readonly >
+                <label for="saldo">Sisa Saldo: </label>
+                <input type="number" name="saldo" id="saldo" value="<?= $totalSaldo["total"] ?>" readonly>
             </li>
 
             <li>
