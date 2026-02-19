@@ -2,13 +2,12 @@
 require_once 'libs.php';
 
 $nominal = query('SELECT * FROM laporan_keuangan');
-var_dump($nominal); 
-echo "<br><br>";
-var_dump(date("d-m-Y"));
+// var_dump($nominal); 
+// echo "<br><br>";
+// var_dump(date("d-m-Y"));
 
-$totalSaldo = sumSaldo();
-$totalDebit = sumDebit();
-$totalKredit = sumKredit();
+$totalData = sumTotal();
+var_dump($totalData);
 
 ?>
 
@@ -38,26 +37,30 @@ $totalKredit = sumKredit();
         </tr>
 
         <!-- data load looping -->
+        <?php $i = 1; ?>
         <?php foreach($nominal as $row) : ?>
             <tr>
-                <td>1</td>
-                <td><a href="ubah.php?id=<?= $row["id"]; ?>">ubah</a> | 
-                <a href="hapus.php?id=<?= $row["id"]; ?> ">hapus</a></td>
+                <td><?= $i; ?></td>
+                <td>
+                    <a href="ubah.php?id=<?= $row["id"]; ?>">ubah</a> | 
+                    <a href="hapus.php?id=<?= $row["id"]; ?> ">hapus</a>
+                </td>
                 <td><?= $row["tanggal"]; ?></td>
                 <td><?= $row["keterangan"]; ?></td>
-                <td><?= $row["debit"]; ?></td>
-                <td><?= $row["kredit"]; ?></td>
-                <td><?= $row["saldo"]; ?></td>
+                <td>Rp. <?= $row["debit"]; ?></td>
+                <td>Rp. <?= $row["kredit"]; ?></td>
+                <td>Rp. <?= $row["saldo"]; ?></td>
             </tr>
+        <?php $i++ ?>
         <?php endforeach; ?>
         <!-- data load looping end -->
 
         <!-- total data -->
         <tr>
             <td colspan="4">Total</td>
-            <td><?= $totalDebit["total"]; ?></td>
-            <td><?= $totalKredit["total"]; ?></td>
-            <td><?= $totalSaldo["total"]; ?></td>
+            <td>Rp. <?= $totalData["totalDebit"]; ?></td>
+            <td>Rp. <?= $totalData["totalKredit"]; ?></td>
+            <td>Rp. <?= $totalData["totalSaldo"]; ?></td>
         </tr>
         <!-- total data end -->
     </table>

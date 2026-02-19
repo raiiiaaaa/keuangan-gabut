@@ -6,10 +6,10 @@ echo date('Y-m-d');
 echo "<br><br><br>";
 
 // $result = mysqli_fetch_assoc($nominalSaldo);
-$totalSaldo = sumSaldo();
+$totalData = sumTotal();
 
-var_dump($totalSaldo);
-var_dump($totalSaldo["total"]);
+var_dump($totalData);
+echo "<br><br>";
 
 if(isset($_POST["submit"])) {
 
@@ -44,24 +44,23 @@ if(isset($_POST["submit"])) {
     <form action="" method="POST">
         <ul>
             <li>
-                <input type="hidden" name="<?= $totalSaldo; ?>">
                 <label for="keterangan">Keterangan: </label>
-                <input type="text" name="keterangan" id="keterangan">
+                <input type="text" name="keterangan" id="keterangan" autocomplete="off">
             </li>
 
             <li>
-                <label for="debit">Debit: </label>
+                <label for="debit">Debit: Rp.</label>
                 <input type="number" name="debit" id="debit">
             </li>
 
             <li>
-                <label for="kredit">Kredit: </label>
+                <label for="kredit">Kredit: Rp.</label>
                 <input type="number" name="kredit" id="kredit">
             </li>
 
             <li>
-                <label for="saldo">Sisa Saldo: </label>
-                <input type="number" name="saldo" id="saldo" value="<?= $totalSaldo["total"] ?>" readonly>
+                <label for="saldo">Sisa Saldo: Rp.</label>
+                <input type="number" name="saldo" id="saldo" value="<?= $totalData["totalSaldo"] ?>" readonly>
             </li>
 
             <li>

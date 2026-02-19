@@ -34,7 +34,17 @@ function tambah($data) {
     return mysqli_affected_rows($conn);
 }
 
+function hapus($id) {
+    global $conn;
+    $query = "DELETE FROM laporan_keuangan WHERE id = $id";
+
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
 // OPERASI TOTAL SUM
+
+
 function sumSaldo() {
     global $conn;
 
@@ -60,6 +70,23 @@ function sumKredit() {
     $result = mysqli_query($conn, $query);
 
     return mysqli_fetch_assoc($result);
+}
+
+function setTotal() {
+    global $conn;
+}
+
+function sumTotal() {
+    global $conn;
+
+    $query = "SELECT SUM(debit) AS totalDebit,
+                SUM(kredit) AS totalKredit,
+                SUM(saldo) AS totalSaldo
+                FROM laporan_keuangan";
+
+    $result = mysqli_query($conn, $query);
+
+        return mysqli_fetch_assoc($result);
 }
 
 function ubah($data) {
